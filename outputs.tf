@@ -5,27 +5,27 @@ output "availability_zones" {
 
 output "database_subnets" {
   description = "List of IDs of database subnets"
-  value = data.aws_subnets.this_database.ids
+  value       = [for k, v in data.aws_subnet.this_database : v.id]
 }
 
 output "database_subnets_az_map" {
   description = "Map of database subnets by AZ"
-  value = data.aws_subnet.this_database
+  value       = data.aws_subnet.this_database
 }
 
 output "database_subnets_cidr_blocks" {
   description = "List of cidr_blocks of database subnets"
-  value = [for k, v in data.aws_subnet.this_database : v.cidr_block]
+  value       = [for k, v in data.aws_subnet.this_database : v.cidr_block]
 }
 
 output "private_subnets" {
   description = "List of IDs of private subnets"
-  value = data.aws_subnets.this_private.ids
+  value       = [for k, v in data.aws_subnet.this_private : v.id]
 }
 
 output "private_subnets_az_map" {
   description = "Map of private subnets by AZ"
-  value = data.aws_subnet.this_private
+  value       = data.aws_subnet.this_private
 }
 
 output "private_subnets_cidr_blocks" {
@@ -35,12 +35,12 @@ output "private_subnets_cidr_blocks" {
 
 output "public_subnets" {
   description = "List of IDs of public subnets"
-  value = data.aws_subnets.this_public.ids
+  value       = [for k, v in data.aws_subnet.this_public : v.id]
 }
 
 output "public_subnets_az_map" {
   description = "Map of public subnets by AZ"
-  value = data.aws_subnet.this_public
+  value       = data.aws_subnet.this_public
 }
 
 output "public_subnets_cidr_blocks" {
