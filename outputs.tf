@@ -3,6 +3,11 @@ output "availability_zones" {
   value       = local.availability_zones
 }
 
+output "database_route_tables" {
+  description = "List of IDs of database subnet route tables"
+  value       = [for k, v in data.aws_route_table.this_database : v.route_table_id]
+}
+
 output "database_subnets" {
   description = "List of IDs of database subnets"
   value       = [for k, v in data.aws_subnet.this_database : v.id]
@@ -18,6 +23,11 @@ output "database_subnets_cidr_blocks" {
   value       = [for k, v in data.aws_subnet.this_database : v.cidr_block]
 }
 
+output "private_route_tables" {
+  description = "List of IDs of private subnet route tables"
+  value       = [for k, v in data.aws_route_table.this_private : v.route_table_id]
+}
+
 output "private_subnets" {
   description = "List of IDs of private subnets"
   value       = [for k, v in data.aws_subnet.this_private : v.id]
@@ -31,6 +41,11 @@ output "private_subnets_az_map" {
 output "private_subnets_cidr_blocks" {
   description = "List of cidr_blocks of private subnets"
   value       = [for k, v in data.aws_subnet.this_private : v.cidr_block]
+}
+
+output "public_route_tables" {
+  description = "List of IDs of public subnet route tables"
+  value       = [for k, v in data.aws_route_table.this_public : v.route_table_id]
 }
 
 output "public_subnets" {

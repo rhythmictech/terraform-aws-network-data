@@ -1,3 +1,17 @@
+data "aws_route_table" "this_database" {
+  for_each  = toset(data.aws_subnets.this_database.ids)
+  subnet_id = each.value
+}
+
+data "aws_route_table" "this_private" {
+  for_each  = toset(data.aws_subnets.this_private.ids)
+  subnet_id = each.value
+}
+
+data "aws_route_table" "this_public" {
+  for_each  = toset(data.aws_subnets.this_public.ids)
+  subnet_id = each.value
+}
 
 data "aws_ssm_parameter" "availability_zones" {
   name = "/aft/account-request/custom-fields/vpc_availability_zones"
